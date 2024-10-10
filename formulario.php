@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     $nombre = $email = $edad = '';
 
     $error_nombre = $error_email = $error_edad = FALSE;
@@ -34,6 +36,14 @@
             $errores .= "<span class=\"error\">¡ERROR! No se ha enviado ningún edad.<br/></span>";
             $error_edad = TRUE;
         }
+
+        if($errores == '')
+        {
+            $_SESSION['usuario'] = $_POST['nombre'];
+            $_SESSION['email'] = $_POST['email'];
+            $_SESSION['edad'] = $_POST['edad'];
+            $_SESSION['pais'] = $_POST['pais'];
+        }
     }
 ?>
 
@@ -48,7 +58,6 @@
     <style>
         .error_nombre, .error_email, .error_edad, .error_pais{
             color:#ff0000;
-            font-weight:blod;
         }
 
 
@@ -60,17 +69,17 @@
         <?php echo $errores; ?>
         <div class="campo">
             <label class="<?php echo $error_nombre; ?>" for="nombre">Nombre:</label>
-            <input type="text" id="nombre" value="<?php echo $nombre; ?>" placeholder="Nombre de la persona...">
+            <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" placeholder="Nombre de la persona...">
         </div>
 
         <div class="campo">
             <label class="<?php echo $error_email; ?>" for="email">Email:</label>
-            <input type="email" id="email" value="<?php echo $email; ?>" placeholder="Email...">
+            <input type="email" id="email" name="email" value="<?php echo $email; ?>" placeholder="Email...">
         </div>
 
         <div class="campo">
             <label class="<?php echo $error_edad; ?>" for="edad">Edad:</label>
-            <input type="number" id="edad" value="<?php echo $edad; ?>" placeholder="Edad...">
+            <input type="number" id="edad" name="edad" value="<?php echo $edad; ?>" placeholder="Edad...">
         </div>
 
         <div class="campo">
